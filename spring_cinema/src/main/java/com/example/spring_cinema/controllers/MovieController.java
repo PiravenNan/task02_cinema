@@ -23,6 +23,17 @@ public class MovieController {
         return new ResponseEntity<>(reply, HttpStatus.CREATED);
     }
 
+    @PatchMapping(value = "/remove/{id}")
+    public ResponseEntity<Reply> newMovie(@PathVariable long id){
+        Reply reply = movieService.removeMovie(id);
+        return new ResponseEntity<>(reply, HttpStatus.GONE);
+    }
+
+    @PatchMapping(value = "/update/{id}")
+    public ResponseEntity<Reply> updateMovie(@RequestBody Movie movie, @PathVariable long id){
+        Reply reply = movieService.updateMovie(id,movie);
+        return new ResponseEntity<>(reply, HttpStatus.ACCEPTED);
+    }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Reply> getMovies(@PathVariable long id){
         Reply reply;

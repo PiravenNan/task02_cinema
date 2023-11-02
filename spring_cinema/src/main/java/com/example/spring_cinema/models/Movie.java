@@ -17,9 +17,9 @@ public class Movie {
     private String rating;
 
     @Column(name = "duration")
-    private String duration;
+    private int duration;
 
-    public Movie(String title, String rating, String duration) {
+    public Movie(String title, String rating, int duration) {
         this.title = title;
         this.rating = rating;
         this.duration = duration;
@@ -52,11 +52,11 @@ public class Movie {
         this.rating = rating;
     }
 
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 }
