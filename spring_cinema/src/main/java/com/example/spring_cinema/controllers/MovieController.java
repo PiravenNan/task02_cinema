@@ -2,6 +2,7 @@ package com.example.spring_cinema.controllers;
 
 import com.example.spring_cinema.models.Movie;
 import com.example.spring_cinema.models.Reply;
+import com.example.spring_cinema.repositories.MovieRepository;
 import com.example.spring_cinema.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -41,18 +43,21 @@ public class MovieController {
         return new ResponseEntity<>(reply, HttpStatus.ACCEPTED);
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Reply> getMovies(@PathVariable long id){
-        Reply reply;
+    public ResponseEntity<Movie> getMovies(@PathVariable long id){
 
         //may exist may not
         Optional<Movie> movie = movieService.getMovieById(id);
 
         if (movie.isEmpty()){
-            reply = new Reply("ID is not in database");
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);//reply = new Reply("ID is not in database");
         }else{
-            reply = new Reply("ID found");
+            return new ResponseEntity<>(movie.get(), HttpStatus.OK); //reply = new Reply("ID found");
         }
-        return new ResponseEntity<>(reply, HttpStatus.CONTINUE);
+
+    }
+    @GetMapping
+    public ResponseEntity<List<Movie>> getAllMovies(){
+        return new ResponseEntity<>(movieService.getAllMovies(),HttpStatus.OK);
     }
 
 }

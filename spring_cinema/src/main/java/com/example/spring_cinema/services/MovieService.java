@@ -7,6 +7,8 @@ import com.example.spring_cinema.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +21,10 @@ public class MovieService {
     public Reply addMovie(Movie movie){
         movieRepository.save(movie);
         return new Reply("Added movie");
+    }
+
+    public List<Movie> getAllMovies(){
+        return movieRepository.findAll();
     }
 
     public Reply removeMovie(long id){
