@@ -47,6 +47,19 @@ public class MovieService {
 
     }
 
+    public Reply findMovieLessThanDuration(int maxDuration){
+        Iterable<Movie> Movies = movieRepository.findAll();
+        String results = "Movies shorter than " + maxDuration + " minutes: ";
+
+        for (Movie movie : Movies){
+            if (movie.getDuration()<maxDuration){
+                results += movie.getTitle() + " ";
+            }
+        }
+
+        return new Reply(results);
+    }
+
 
     public Optional<Movie> getMovieById(long id){
         return movieRepository.findById(id);

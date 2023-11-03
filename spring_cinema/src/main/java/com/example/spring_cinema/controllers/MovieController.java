@@ -29,6 +29,12 @@ public class MovieController {
         return new ResponseEntity<>(reply, HttpStatus.GONE);
     }
 
+    @PatchMapping(value = "/duration/{duration}")
+    public ResponseEntity<Reply> findMovieLessThanDuration(@PathVariable int duration){
+        Reply reply = movieService.findMovieLessThanDuration(duration);
+        return new ResponseEntity<>(reply, HttpStatus.ACCEPTED);
+    }
+
     @PatchMapping(value = "/update/{id}")
     public ResponseEntity<Reply> updateMovie(@RequestBody Movie movie, @PathVariable long id){
         Reply reply = movieService.updateMovie(id,movie);
